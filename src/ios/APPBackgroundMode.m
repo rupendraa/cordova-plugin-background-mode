@@ -239,13 +239,30 @@ NSString* const kAPPBackgroundEventDeactivate = @"deactivate";
 /**
  * Method to swizzle.
  */
-+ (NSString*) wkProperty
-{
-    NSString* str = @"YWx3YXlzUnVuc0F0Rm9yZWdyb3VuZFByaW9yaXR5";
-    NSData* data  = [[NSData alloc] initWithBase64EncodedString:str options:0];
 
-    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+
+if (@available(iOS 12.2, *)) {
+            // do stuff for iOS 12.2 and newer
+    + (NSString*) wkProperty
+    {
+        NSString* str = @"YWx3YXlzUnVuc0F0Rm9yZWdyb3VuZFByaW9yaXR5";
+        NSData* data  = [[NSData alloc] initWithBase64EncodedString:str options:0];
+
+        return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }
+} else {
+            // do stuff for iOS 12.1 and older
+    + (NSString*) wkProperty
+    {
+        NSString* str = @"X2Fsd2F5c1J1bnNBdEZvcmVncm91bmRQcmlvcml0eQ==";
+        NSData* data  = [[NSData alloc] initWithBase64EncodedString:str options:0];
+
+        return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }
 }
+
+   
+
 
 /**
  * Swizzle some implementations of CDVWKWebViewEngine.
